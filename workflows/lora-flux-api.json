@@ -1,0 +1,166 @@
+{
+  "1": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "2": {
+    "inputs": {
+      "unet_name": "flux1-dev.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader"
+  },
+  "3": {
+    "inputs": {
+      "lora_01": "jazzy-kohya-000016.safetensors",
+      "strength_01": 0.8,
+      "lora_02": "None",
+      "strength_02": 1,
+      "lora_03": "None",
+      "strength_03": 1,
+      "lora_04": "None",
+      "strength_04": 1,
+      "model": [
+        "2",
+        0
+      ],
+      "clip": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "Lora Loader Stack (rgthree)"
+  },
+  "4": {
+    "inputs": {
+      "clip_name1": "t5xxl_fp16.safetensors",
+      "clip_name2": "clip_l.safetensors",
+      "type": "flux"
+    },
+    "class_type": "DualCLIPLoader"
+  },
+  "5": {
+    "inputs": {
+      "text": "An illustration of an armchair and bar cart with some whiskey and wine bottles, featuring beige, orange. In the foreground is a table on wheels with various glasses filled with bourbon and some smoking pipes. The backgeround is the window looking out the new york buildings, city at night night. This composition creates a sophisticated atmosphere, perfect for drinking whiskey alone or with friends at night\n\n\n\n\n\n",
+      "clip": [
+        "3",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "6": {
+    "inputs": {
+      "width": 1080,
+      "height": 1920,
+      "batch_size": 4
+    },
+    "class_type": "EmptyLatentImage"
+  },
+  "7": {
+    "inputs": {
+      "noise_seed": 863279181654204
+    },
+    "class_type": "RandomNoise"
+  },
+  "8": {
+    "inputs": {
+      "sampler_name": "euler"
+    },
+    "class_type": "KSamplerSelect"
+  },
+  "9": {
+    "inputs": {
+      "scheduler": "normal",
+      "steps": 28,
+      "denoise": 1,
+      "model": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "BasicScheduler"
+  },
+  "10": {
+    "inputs": {
+      "guidance": 3.5,
+      "conditioning": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "FluxGuidance"
+  },
+  "11": {
+    "inputs": {
+      "model": [
+        "3",
+        0
+      ],
+      "conditioning": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "BasicGuider"
+  },
+  "12": {
+    "inputs": {
+      "noise": [
+        "7",
+        0
+      ],
+      "guider": [
+        "11",
+        0
+      ],
+      "sampler": [
+        "8",
+        0
+      ],
+      "sigmas": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ]
+    },
+    "class_type": "SamplerCustomAdvanced"
+  },
+  "13": {
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "14": {
+    "inputs": {
+      "images": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "PreviewImage"
+  },
+  "15": {
+    "inputs": {
+      "filename_prefix": "Jazzy-kohya/kohya",
+      "images": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "SaveImage"
+  }
+}
