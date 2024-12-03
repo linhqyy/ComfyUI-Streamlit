@@ -2,9 +2,6 @@
 
 This repository contains a simple example code demonstrating how to use the ComfyUI API from a Streamlit client.
 
-## Demo
-
-YouTube link: https://youtu.be/Ll5slBLa0II
 
 ## Setup and Run
 
