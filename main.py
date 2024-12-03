@@ -38,7 +38,7 @@ def side_bar():
 def main():
     st.set_page_config(
         page_title="HG AI Team",
-        page_icon="🎨",
+        page_icon=":bridge_at_night:",
         layout="wide"
     )
     
