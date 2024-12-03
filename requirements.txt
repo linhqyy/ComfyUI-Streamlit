@@ -4,3 +4,4 @@ opencv-python
 streamlit-image-coordinates
 extra_streamlit_components
 streamlit-image-comparison
+websocket_client
